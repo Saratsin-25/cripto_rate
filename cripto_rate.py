@@ -11,6 +11,10 @@ def update_cr_label(event):
     cr_label.config(text=f"{code} ({name})")
 
 
+def cripto_rate():
+    pass
+
+
 cripto = {
     "Bitcoin": "BTC",
     "Ethereum": "ETH",
@@ -32,5 +36,7 @@ cr_combobox.bind("<<ComboboxSelected>>", update_cr_label)
 
 cr_label = ttk.Label()
 cr_label.pack(padx=10, pady=10)
+
+Button(text="Получить курс выбранной криптовалюты", command=cripto_rate).pack(padx=10, pady=10)
 
 window.mainloop()
