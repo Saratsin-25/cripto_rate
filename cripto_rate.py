@@ -26,22 +26,15 @@ def cripto_rate():
             response = requests.get(f'https://api.coingecko.com/api/v3/simple/price?ids={cr_code}&vs_currencies=usd')
             response.raise_for_status()
             data = response.json()
-            exchange_rate = data[cr_code]['usd']
-            update_rate_label()
-
-
-
-
-
-
-
-        except Exception as err:
-            print(err)
-
-
-
-
-
+            if cr_code in data:
+                exchange_rate = data[cr_code]['usd']
+                update_rate_label()
+            else:
+                mb.showerror("Ошибка", f"Криптовалюта {cr_code} не найдена!")
+        except Exception as e:
+            mb.showerror("Ошибка", f"Произошла ошибка: {e}.")
+    else:
+        mb.showwarning("Внимание!", f"Введите код валюты!")
 
 
 cripto = {
