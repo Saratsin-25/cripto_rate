@@ -12,7 +12,29 @@ def update_cr_label(event):
 
 
 def cripto_rate():
-    pass
+    cr_code = (cr_combobox.get()).lower()
+    print(f"cr_code={cr_code}")
+    print(f'https://api.coingecko.com/api/v3/simple/price?ids={cr_code}&vs_currencies=usd')
+
+    if cr_code:
+        try:
+            response = requests.get(f'https://api.coingecko.com/api/v3/simple/price?ids={cr_code}&vs_currencies=usd')
+            response.raise_for_status()
+            data = response.json()
+            exchange_rate = data[cr_code]['usd']
+
+            print(data)
+            print(exchange_rate)
+
+
+
+        except Exception as err:
+            print(err)
+
+
+
+
+
 
 
 cripto = {
