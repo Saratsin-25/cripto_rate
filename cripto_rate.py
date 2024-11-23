@@ -5,8 +5,10 @@ from tkinter import messagebox as mb
 from tkinter import ttk
 
 
-def update_cr_label():
-    pass
+def update_cr_label(event):
+    code = cr_combobox.get()
+    name = cripto[code]
+    cr_label.config(text=f"{code} ({name})")
 
 
 cripto = {
