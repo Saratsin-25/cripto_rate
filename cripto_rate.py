@@ -22,7 +22,7 @@ def update_t_label(event):
 
 
 def update_rate_label():
-    rate_label.config(text=f"Курс: {exchange_rate:.2f} {t_code} за 1 {code}")
+    rate_label.config(text=f"Курс: {exchange_rate:.2f} {t_code} за 1 {code}", font=(14))
 
 
 def cripto_rate():
