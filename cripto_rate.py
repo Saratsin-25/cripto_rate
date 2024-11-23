@@ -11,15 +11,14 @@ def update_cr_label(event):
     name = cripto[code]
     cr_label.config(text=f"{code} ({name})")
 
+
 def update_rate_label():
     rate_label.config(text=f"Курс: {exchange_rate:.2f} usd за 1 {code}")
-
 
 
 def cripto_rate():
     global exchange_rate
     cr_code = (cr_combobox.get()).lower()
-
 
 
     if cr_code:
