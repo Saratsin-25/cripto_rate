@@ -6,15 +6,21 @@ from tkinter import ttk
 
 
 def update_cr_label(event):
+    global code
     code = cr_combobox.get()
     name = cripto[code]
     cr_label.config(text=f"{code} ({name})")
 
+def update_rate_label():
+    rate_label.config(text=f"Курс: {exchange_rate:.2f} usd за 1 {code}")
+
+
 
 def cripto_rate():
+    global exchange_rate
     cr_code = (cr_combobox.get()).lower()
-    print(f"cr_code={cr_code}")
-    print(f'https://api.coingecko.com/api/v3/simple/price?ids={cr_code}&vs_currencies=usd')
+
+
 
     if cr_code:
         try:
@@ -22,9 +28,11 @@ def cripto_rate():
             response.raise_for_status()
             data = response.json()
             exchange_rate = data[cr_code]['usd']
+            update_rate_label()
 
-            print(data)
-            print(exchange_rate)
+
+
+
 
 
 
@@ -60,5 +68,8 @@ cr_label = ttk.Label()
 cr_label.pack(padx=10, pady=10)
 
 Button(text="Получить курс выбранной криптовалюты", command=cripto_rate).pack(padx=10, pady=10)
+
+rate_label = ttk.Label()
+rate_label.pack(padx=10, pady=10)
 
 window.mainloop()
