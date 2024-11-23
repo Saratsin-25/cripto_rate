@@ -1,5 +1,4 @@
 import requests
-import json
 from tkinter import *
 from tkinter import messagebox as mb
 from tkinter import ttk
@@ -20,7 +19,6 @@ def cripto_rate():
     global exchange_rate
     cr_code = (cr_combobox.get()).lower()
 
-
     if cr_code:
         try:
             response = requests.get(f'https://api.coingecko.com/api/v3/simple/price?ids={cr_code}&vs_currencies=usd')
@@ -36,7 +34,6 @@ def cripto_rate():
     else:
         mb.showwarning("Внимание!", f"Введите код валюты!")
 
-
 cripto = {
     "Bitcoin": "BTC",
     "Ethereum": "ETH",
@@ -45,6 +42,19 @@ cripto = {
     "Cardano": "ADA",
     }
 
+cur = {
+    "EUR": "Евро",
+    "JPY": "Японская йена",
+    "GBP": "Британский фунт стерлингов",
+    "AUD": "Австралийский доллар",
+    "CAD": "Канадский доллар",
+    "CHF": "Швейцарский франк",
+    "CNY": "Китайский юань",
+    "RUB": "Российский рубль",
+    "KZT": "Казахстанский тенге",
+    "UZS": "Узбекский сум",
+    "USD": "Американский доллар"
+    }
 
 window = Tk()
 window.title("Обменные курсы криптовалют")
@@ -58,6 +68,11 @@ cr_combobox.bind("<<ComboboxSelected>>", update_cr_label)
 
 cr_label = ttk.Label()
 cr_label.pack(padx=10, pady=10)
+
+Label(text="Целевая валюта").pack(padx=10, pady=10)
+t_combobox = ttk.Combobox(values=list(cur.keys()))
+t_combobox.pack(padx=10, pady=10)
+t_combobox.bind("<<ComboboxSelected>>", update_t_label)
 
 Button(text="Получить курс выбранной криптовалюты", command=cripto_rate).pack(padx=10, pady=10)
 
